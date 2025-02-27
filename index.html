@@ -6,21 +6,158 @@
     <title>Happy Birthday!</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #fce4ec;
+            font-family: Arial, sans-serif;
+            background-color: #ffccff;
+            color: #333;
+            filter: grayscale(100%);
+            transition: filter 3s ease-in-out, background 5s ease-in-out;
+            overflow: hidden;
         }
+
         h1 {
-            color: #e91e63;
+            font-size: 40px;
+            color: #ff3366;
+            text-shadow: 0 0 10px #ff6699, 0 0 20px #ff3366;
+            animation: glow 1.5s infinite alternate;
         }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ff6699, 0 0 10px #ff3366; }
+            100% { text-shadow: 0 0 15px #ff99cc, 0 0 30px #ff3366; }
+        }
+
         p {
-            font-size: 18px;
-            color: #555;
+            font-size: 20px;
+        }
+
+        .balloons {
+            font-size: 50px;
+            animation: floatBalloon 3s infinite ease-in-out;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .balloon {
+            display: inline-block;
+            animation: float 2.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-20px); }
+        }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(5px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        /* Fireworks */
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            animation: explode 1s infinite;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        /* Button Style */
+        .play-button {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 10px;
         }
     </style>
 </head>
+
 <body>
-    <h1>🎉 Happy Birthday! 🎂</h1>
-    <p>Wishing you a fantastic year ahead!</p>
+  
+    <!-- Music Player -->
+    <audio id="bdaySong" loop>
+        <source src="dunyaa.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Play Button -->
+    <button class="play-button" onclick="playAudio()">🎵 Play Music</button>
+
+    <script>
+        function playAudio() {
+            let music = document.getElementById("bdaySong");
+            music.play();
+            document.querySelector(".play-button").style.display = "none"; // Hide button after clicking
+        }
+
+        // Remove black & white effect & change background color after 5 seconds
+        setTimeout(() => {
+            document.body.style.filter = "none";
+            document.body.style.backgroundColor = "#ffe6f2";
+        }, 5000);
+
+        // Fireworks Effect
+        function createFirework() {
+            let firework = document.createElement("div");
+            firework.classList.add("firework");
+            document.body.appendChild(firework);
+
+            firework.style.left = Math.random() * window.innerWidth + "px";
+            firework.style.top = Math.random() * window.innerHeight + "px";
+
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        }
+
+        setInterval(createFirework, 500);
+    </script>
+
+    <div style="text-align: center;">
+        <h1>🎉 Happy Birthday 🎂</h1>
+        <h2 style="color: purple;">Faria Khan 💖</h2>
+    </div>
+    
+    <!-- Slow Reveal Messages -->
+    <h1 id="line1" style="opacity: 0; transition: opacity 2s;">Play music and wait at least 10 seconds 🙂</h1>
+    <h1 id="line2" style="opacity: 0; transition: opacity 3s; color: purple; font-size: 40px;">
+        💜 I miss you ... 🥺💜
+    </h1>
+
+    <script>
+        setTimeout(() => { document.getElementById("line1").style.opacity = "1"; }, 3000);
+        setTimeout(() => { document.getElementById("line2").style.opacity = "1"; }, 10000);
+    </script>
+
+    <p id="msg" style="opacity: 0; transition: opacity 3s;">
+        "Another year, another day without you by my side. I wish I could be there to celebrate with you, to see your smile, 
+        and to make this day as special as you are. No matter where life takes us, you’ll always have a place in my heart. 
+        I miss you more than words can say…...      A lot more to say and clear some doubts but its ok... 💖"
+    </p>
+
+    <script>
+        setTimeout(() => { document.getElementById("msg").style.opacity = "1"; }, 12000);
+    </script>
+
+    <p class="balloons">
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+    </p>
+    
+    <p>Vesy aps ke baat,, yeah song yaad hai 😂😁 ♾</p>
+    <p>From, Your Secret Programmer😉</p>
+
 </body>
 </html>
